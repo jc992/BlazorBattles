@@ -13,13 +13,28 @@
 </div>
 
 <button @onclick="BuildUnit" class="btn btn-primary">Build</button>
+
+@if (needMoreBananas)
+{
+    <div class="validation-message">Not enough bananas! :(</div>
+}
 @code {
+    bool needMoreBananas = false;
+
     int selectedUnitId = 1;
 
     public void BuildUnit()
     {
         BlazorBattles.Shared.Unit selectedUnit =
             UnitService.Units.FirstOrDefault(u => u.Id == selectedUnitId);
+
+        if (BananaService.Bananas < selectedUnit.BananaCost)
+        {
+            needMoreBananas = true;
+            return;
+        }
+
+        needMoreBananas = false;
 
         BananaService.EatBananas(selectedUnit.BananaCost);
 
