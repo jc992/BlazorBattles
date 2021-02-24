@@ -10,18 +10,14 @@ else
 
     <EditForm Model="@user" OnValidSubmit="HandleLogin">
         <DataAnnotationsValidator />
-        <p>
-            <label>Username</label>
-            <div>
-                <InputText id="username" @bind-Value="user.Username" />
-            </div>
-        </p>
-        <p>
-            <label>Password</label>
-            <div>
-                <InputText id="password" type="password" @bind-Value="user.Password" />
-            </div>
-        </p>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <InputText id="username" @bind-Value="user.Username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <InputText id="password" type="password" @bind-Value="user.Password" class="form-control" />
+        </div>
         <button type="submit" class="btn btn-primary mb-2">Login</button>
         <ValidationSummary />
     </EditForm>
