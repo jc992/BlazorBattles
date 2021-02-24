@@ -1,5 +1,6 @@
 ﻿@page "/army"
 @inject BlazorBattles.Client.Services.IUnitService UnitService
+@attribute [Authorize]
 
 <h3>Army</h3>
 
@@ -11,7 +12,7 @@
             {
                 case 1:<img src="/icons/W_Sword006.png" /> break;
                 case 2: <img src="/icons/S_Bow08.png" /> break;
-                case 3: <img src="/icons/C_Hat01.png" /> break;
+                case 3: <img src="/icons/C_Hat01.png" />break;
             }
         </div>
         <div>
