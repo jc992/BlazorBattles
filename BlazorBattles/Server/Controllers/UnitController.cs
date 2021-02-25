@@ -20,6 +20,7 @@ namespace BlazorBattles.Server.Controllers
         {
             _context = context;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetUnits()
         {
