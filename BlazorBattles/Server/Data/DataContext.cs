@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BlazorBattles.Shared;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,11 @@ namespace BlazorBattles.Server.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
+
+        public DbSet<Unit> Units { get; set; }
     }
 }
