@@ -34,7 +34,7 @@ namespace BlazorBattles.Server.Controllers
                 }, request.Password
                 );
 
-            //return !response.Success ? BadRequest(response) : Ok(response)
+            bool result = response.Success;
 
             if (!response.Success)
             {
@@ -48,8 +48,6 @@ namespace BlazorBattles.Server.Controllers
         public async Task<IActionResult> Login(UserLogin request)
         {
             var response = await _authRepo.Login(request.Email, request.Password);
-
-            //return !response.Success ? BadRequest(response) : Ok(response)
 
             if (!response.Success)
             {
