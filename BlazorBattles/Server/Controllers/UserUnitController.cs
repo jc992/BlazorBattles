@@ -60,7 +60,7 @@ namespace BlazorBattles.Server.Controllers
             var response = userUnits.Select(
                 u => new UserUnitResponse
                 {
-                    UnitId = u.Id,
+                    UnitId = u.UnitId,
                     HitPoints = u.HitPoints
                 });
 
