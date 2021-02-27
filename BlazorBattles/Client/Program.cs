@@ -27,6 +27,7 @@ namespace BlazorBattles.Client
             builder.Services.AddScoped<IBananaService, BananaService>();
             builder.Services.AddScoped<IUnitService, UnitService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ILeaderboardService, LeaderboardService>();
 
             //Auth State Provider, Options & Core.
             builder.Services.AddOptions();
