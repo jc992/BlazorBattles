@@ -16,7 +16,7 @@ namespace BlazorBattles.Client.Services
         {
             _http = http;
         }
-        public IList<UserStatistic> Leaderboard { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IList<UserStatistic> Leaderboard { get; set; }
 
         public async Task GetLeaderboard()
         {
