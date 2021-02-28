@@ -1,5 +1,6 @@
 ﻿@page "/leaderboard"
 @inject BlazorBattles.Client.Services.ILeaderboardService LeaderboardService
+@inject AuthenticationStateProvider AuthStateProvider
 
 <h3>Leaderboard</h3>
 
@@ -25,13 +26,18 @@ else
         <tbody>
             @foreach (BlazorBattles.Shared.UserStatistic entry in LeaderboardService.Leaderboard)
             {
-                <tr>
+                <tr style="@GetMyStyle(entry.UserId)">
                     <td>@entry.Rank</td>
                     <td>@entry.Username</td>
                     <td>@entry.Victories</td>
                     <td>@entry.Defeats</td>
                     <td>@entry.Battles</td>
-                    <td><button class="btn btn-primary">Fight</button></td>
+                    <td>
+                        @if (entry.UserId != myUsedId)
+                        {
+                            <button class="btn btn-primary">Fight</button>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -39,8 +45,19 @@ else
 }
 
 @code {
+    int myUsedId;
+
     protected override async Task OnInitializedAsync()
     {
         await LeaderboardService.GetLeaderboard();
+
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        myUsedId = int.Parse(authState.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+    }
+
+    public string GetMyStyle(int userId)
+    {
+        if (userId == myUsedId) return "color:green; font-weight:600";
+        else return string.Empty;
     }
 }
