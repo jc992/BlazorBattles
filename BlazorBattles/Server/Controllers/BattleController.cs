@@ -152,5 +152,31 @@ namespace BlazorBattles.Server.Controllers
 
             _context.Battles.Add(battle);
         }
+        [HttpGet("History")]
+        public async Task<IActionResult> GetHistory()
+        {
+            var user = await _utilityService.GetUser();
+            var battles = await _context.Battles
+                .Where(b => b.AttackerId == user.Id || b.OpponentId == user.Id)
+                .Include(b => b.Attacker)
+                .Include(b => b.Opponent)
+                .Include(b => b.Winner)
+                .ToListAsync();
+
+            var history = battles.Select(b => new BattleHistoryEntry
+            {
+                BattleId = b.Id,
+                AttackerId = b.AttackerId,
+                OpponentId = b.OpponentId,
+                YouWon = b.WinnerId == user.Id,
+                AttackerName = b.Attacker.Username,
+                OpponentName = b.Opponent.Username,
+                RoundsFought = b.RoundsFought,
+                WinnerDamageDealt = b.WinnerDamage,
+                BattleDate = b.BattleDate
+            });
+
+            return Ok(history.OrderByDescending(h => h.BattleDate));
+        }
     }
 }
