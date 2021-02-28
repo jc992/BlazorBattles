@@ -42,7 +42,7 @@
         <InputSelect id="start-unit" @bind-Value="user.StartUnitId" class="form-control">
             @foreach (var unit in UnitService.Units)
             {
-                <option value="unit.Id.ToString()">@unit.Title</option>
+                <option value="@unit.Id.ToString()">@unit.Title</option>
             }
         </InputSelect>
     </div>
