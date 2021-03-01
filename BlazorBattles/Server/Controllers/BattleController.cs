@@ -125,13 +125,13 @@ namespace BlazorBattles.Server.Controllers
                 attacker.Victories++;
                 opponent.Defeats++;
                 attacker.Bananas += opponentDamageSum;
-                opponent.Bananas += attackerDamageSum * 10;
+                opponent.Bananas -= attackerDamageSum;
             }
             else
             {
                 attacker.Defeats++;
                 opponent.Victories++;
-                attacker.Bananas += opponentDamageSum * 10;
+                attacker.Bananas -= opponentDamageSum;
                 opponent.Bananas += attackerDamageSum;
             }
 
